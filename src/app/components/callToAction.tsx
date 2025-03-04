@@ -1,6 +1,6 @@
 export default function CallToAction() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black text-white">
+    <div className="flex items-center justify-center min-h-screen text-white">
       <div className="bg-gray-900 border border-stone-600 rounded-lg p-10 max-w-2xl text-center">
         <div className="flex justify-center items-center w-14 h-14 rounded-full bg-indigo-600 mb-4">
           <span className="text-white text-xl">🚀</span>
