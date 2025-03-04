@@ -1,26 +1,24 @@
 'use client';
 
-import { useEffect } from "react";
 import { CheckCircle } from "lucide-react";
 import '@fontsource-variable/geist-mono';
+import CopyEmail from "./components/copyEmail";
+import CallToAction from "./components/callToAction";
 
 export default function PricingPage() {
-  useEffect(() => {
-    const links = document.querySelectorAll("nav a");
-    links.forEach(link => {
-      link.addEventListener("click", (event) => {
-        event.preventDefault();
-        const targetId = link.getAttribute("href").substring(1);
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 60,
-            behavior: "smooth",
-          });
-        }
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const href = e.currentTarget.getAttribute("href");
+    if (!href) return;
+    const targetId = href.substring(1);
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 60,
+        behavior: "smooth",
       });
-    });
-  }, []);
+    }
+  };
 
   return (
     <div className="bg-gray-100 text-gray-900 font-geist-mono">
@@ -28,8 +26,9 @@ export default function PricingPage() {
       <nav className="fixed top-0 left-0 w-full bg-white shadow-md py-4 px-6 flex justify-between items-center z-50">
         <h1 className="text-2xl font-bold text-w">Flicki<span className="text-purple-500">FY</span></h1>
         <ul className="flex space-x-6 font-semibold">
-          <li><a href="#benefits" className="hover:text-purple-500 transition">Benefícios</a></li>
-          <li><a href="#plans" className="hover:text-purple-500 transition">Planos</a></li>
+          <li><a href="#benefits" onClick={scrollToSection} className="hover:text-purple-500 transition">Benefícios</a></li>
+          <li><a href="#plans" onClick={scrollToSection} className="hover:text-purple-500 transition">Planos</a></li>
+          <li><a href="#contact" onClick={scrollToSection} className="hover:text-purple-500 transition">Contato</a></li>
         </ul>
       </nav>
 
@@ -184,6 +183,19 @@ export default function PricingPage() {
           </div>
         </div>
       </section>
+
+      <section id="contact" className="py-20 px-6 bg-white text-white text-center">
+        <h2 className="text-4xl font-bold mb-2 text-stone-600">Entre em Contato</h2>
+        <h5 className="text-sm mb-10 font-semibold text-stone-600">Estamos aqui para ajudar você!</h5>
+        <div className="flex items-center justify-center">
+          <CopyEmail />
+        </div>
+      </section>
+
+      <section id="contact" className="py-20 px-6 bg-gradient-to-r from-purple-500 to-indigo-600 text-white text-center">
+        <CallToAction />
+      </section>
+      
       <footer className="bg-gray-800 text-white py-6 text-center">
         <p>&copy; {new Date().getFullYear()} Flickify. Todos os direitos reservados.</p>
         <div className="mt-4 space-x-4">
